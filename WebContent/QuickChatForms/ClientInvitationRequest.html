@@ -1,0 +1,88 @@
+<meta charset="UTF-8">
+<html>
+	<style>
+	</style>
+
+	<head>
+	</head>
+	<body>
+		<div>
+			<h3><center>Invitacion al evento</center></h3>
+			<h3><center><!--#event_name--></center></h3>
+		</div>
+		<div>
+			<p>Detalles:</p>
+		</div>
+		<div>
+			<table>
+			   <tr>
+			    <td>Tipo</td>
+			    <td><!--#event_type--></td>
+			  </tr>
+			  <tr>
+			    <td>Fecha</td>
+			    <td><!--#event_date--></td>
+			  </tr>
+			  <tr>
+			    <td>Hora</td>
+			    <td><!--#event_time--></td>
+			  </tr>
+			  <tr>
+			    <td>Estado</td>
+			    <td><!--#event_state--></td>
+			  </tr>
+			  <tr>
+			    <td>Ciudad</td>
+			    <td><!--#event_city--></td>
+			  </tr>
+			  <tr>
+			    <td>Calle</td>
+			    <td><!--#event_street--></td>
+			  </tr>
+			  <tr>
+			    <td>Lugar</td>
+			    <td><!--#event_place--></td>
+			  </tr>			 
+			</table>		
+		</div>
+		<br/>
+		
+		<form  action='<!--#serverURL-->/ClientInvitation_FormAction' method='post'>
+			<div style='display: none;'>
+				<div><!-- required -->
+					<input type='text' id='title'  name='title'  value='Invitacion de cliente a evento'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='messageID'  name='messageID'  value='@messageID'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='senderID'   name='senderID'   value='@senderID'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='receiverID' name='receiverID' value='@receiverID'>
+				</div>
+				
+				<div>
+					<input type='text' id='event_id'   name='event_id'   value='<!--#event_id-->'>
+				</div>
+				<div>
+					<input type='text' id='event_name'   name='event_name'   value='<!--#event_name-->'>
+				</div>
+			</div>
+			<div>
+				<p>¿Desea usted asistir?</p>
+			</div>
+			<div>
+				<input type='radio' id='yes' name='response' value='yes' checked>
+				<label for='yes'>Si</label>
+			</div>
+			<br/>
+			<div>
+				<input type='radio' id='no' name='response' value='no'>
+				<label for='no'>No</label>
+			</div>
+			<br/>
+			<input type='submit' value='Enviar'>
+		</form>
+	</body>
+</html>

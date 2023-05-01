@@ -1,0 +1,75 @@
+<meta charset="UTF-8">
+<html>
+	<style>
+	</style>
+
+	<head>
+	</head>
+	<body>
+		<div>
+			<h3><center>Pedido de atencion</center></h3>
+		</div>
+		<div>
+			<p>Desea usted ser visitador de la siguiente persona:</p>
+		</div>
+		<div>
+			<table>
+			  <tr>
+			    <th>Nombre</th>
+			    <th><!--#name--></th>
+			  </tr>
+			  <tr>
+			    <td>Estado</td>
+			    <td><!--#state--></td>
+			  </tr>
+			  <tr>
+			    <td>Ciudad</td>
+			    <td><!--#city--></td>
+			  </tr>
+			  <tr>
+			    <td>Calle</td>
+			    <td><!--#street--></td>
+			  </tr>
+			  <tr>
+			    <td>Habit.</td>
+			    <td><!--#aptoHab--></td>
+			  </tr>			 
+			</table>		
+		</div>
+		<br/>
+		
+		<form  action='<!--#serverURL-->/VisitorOf_FormAction' method='post'>
+			<div style='display: none;'>
+				<div><!-- required -->
+					<input type='text' id='title'  name='title'  value='Pedido de atencion'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='messageID'  name='messageID'  value='@messageID'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='senderID'   name='senderID'   value='@senderID'>
+				</div>
+				<div><!-- required -->
+					<input type='text' id='receiverID' name='receiverID' value='@receiverID'>
+				</div>
+				<div>
+					<input type='text' id='clientName' name='clientName' value='<!--#client_name-->'>
+				</div>
+				<div>
+					<input type='text' id='clientID'   name='clientID'   value='<!--#client_id-->'>
+				</div>
+			</div>
+			<div>
+				<input type='radio' id='yes' name='response' value='Si' checked>
+				<label for='yes'>Si</label>
+			</div>
+			<br/>
+			<div>
+				<input type='radio' id='no' name='response' value='No'>
+				<label for='no'>No</label>
+			</div>
+			<br/>
+			<input type='submit' value='Enviar'>
+		</form>
+	</body>
+</html>

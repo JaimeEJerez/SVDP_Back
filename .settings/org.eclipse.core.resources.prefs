@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/QuickChatForms/ClientInvitationRequest.html=ISO-8859-1
+encoding//WebContent/QuickChatForms/VolunteerInvitationRequest.html=UTF-8
+encoding//src/svdp/froms_manager/client_invitation/ClientInvitation_FormAction.java=UTF-8
+encoding//src/svdp/froms_manager/vititor_of/VisitorOf_FormAction.java=UTF-8
+encoding//src/svdp/froms_manager/volunteers_invitation/VolunteersInvitation_FormAction.java=UTF-8
+encoding//src/svdp/general/Util.java=UTF-8
+encoding//src/svdp/servlets_utils/GetEventFromVoluntarieID.java=UTF-8
+encoding//src/svdp/servlets_utils/GetLastPostHTMLFromWP.java=UTF-8
+encoding//src/svdp/servlets_utils/GetLastPostURLFromWP.java=UTF-8
+encoding//src/svdp/servlets_utils/SearchChapterChourcheByZipCode.java=UTF-8
+encoding/<project>=ISO-8859-1

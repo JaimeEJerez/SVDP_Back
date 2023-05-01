@@ -1,0 +1,8 @@
+CREATE TABLE ChangePassword (
+	ChangePasswordID	INT AUTO_INCREMENT PRIMARY KEY,
+	DATE_TIME          	TIMESTAMP                    NOT NULL    DEFAULT CURRENT_TIMESTAMP,
+	Email				VARCHAR(128)	 			NOT NULL,
+	Temporal			VARCHAR(128)	 			NOT NULL,
+	KEY (Email)
+) ENGINE=INNODB;
+

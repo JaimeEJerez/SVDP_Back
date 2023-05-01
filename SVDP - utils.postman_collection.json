@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "96720831-48e7-42c0-b66e-9623ff7b2d84",
+		"name": "SVDP - utils",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SendMail2SVP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mailTitle\":\"Titulo\",\r\n    \"mailBody\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer pretium orci tellus, ac hendrerit dui sollicitudin at. Nam non nulla ut sapien maximus ultrices ac efficitur lectus. Mauris porta metus lorem. Proin dolor risus, sagittis quis consequat ac, sagittis ac lacus. Aenean tincidunt vel ex a commodo. Donec dictum, nisl vel blandit mattis, nunc mauris scelerisque eros, vitae placerat nisi dui eu purus. Aliquam tristique vitae nisi et elementum. Duis eleifend odio vitae nunc consequat dictum. Sed vitae iaculis augue. Mauris sit amet pharetra risus. Fusce volutpat rutrum enim. Donec nec purus finibus, gravida felis vel, tincidunt leo. Maecenas nec nisi eget dolor vehicula lacinia.\",\r\n    \"targetMail\":\"jerezmjaime@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/SendMail2SVP?targetMail=jerezmjaime@gmail.com&mailTitle=Titulo decorreo&mailBody=Lorem ipsum",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"SendMail2SVP"
+					],
+					"query": [
+						{
+							"key": "targetMail",
+							"value": "jerezmjaime@gmail.com"
+						},
+						{
+							"key": "mailTitle",
+							"value": "Titulo decorreo"
+						},
+						{
+							"key": "mailBody",
+							"value": "Lorem ipsum"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ValidateUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\":\"jerezmjaime@gmail.com\",\r\n    \"pass\":\"371719\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/ValidateUser",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"ValidateUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_US_states",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/Get_US_states",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"Get_US_states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_US_cities_by_state",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/Get_US_cities_by_state?state=Florida",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"Get_US_cities_by_state"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "Florida"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_US_zipCodes_by_state_city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/Get_US_zipCodes_by_state_city?state=Florida&city=Miami",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"Get_US_zipCodes_by_state_city"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "Florida"
+						},
+						{
+							"key": "city",
+							"value": "Miami"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLastPostURLFromWP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/GetLastPostURLFromWP",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"GetLastPostURLFromWP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLastPostHTMLFromWP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/GetLastPostHTMLFromWP",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"GetLastPostHTMLFromWP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchChapterChourcheByZipCode",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://tc.svdp-help.com/SVDP/SearchChapterChourcheByZipCode?ZipCode=33172",
+					"protocol": "https",
+					"host": [
+						"tc",
+						"svdp-help",
+						"com"
+					],
+					"path": [
+						"SVDP",
+						"SearchChapterChourcheByZipCode"
+					],
+					"query": [
+						{
+							"key": "ZipCode",
+							"value": "33172",
+							"description": "33172, 33170"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GeneratePostmanCollection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/SVDP/GeneratePostmanCollection",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SVDP",
+						"GeneratePostmanCollection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InitTables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/SVDP/GeneratePostmanCollection",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SVDP",
+						"GeneratePostmanCollection"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
