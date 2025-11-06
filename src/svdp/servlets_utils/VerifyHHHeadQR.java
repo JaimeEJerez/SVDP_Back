@@ -3,7 +3,7 @@ package svdp.servlets_utils;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.util.Map;
+import java.util.Hashtable;
 import java.util.Vector;
 
 import javax.servlet.ServletException;
@@ -20,12 +20,13 @@ import fast_track.JSONResponse;
 import fast_track.MySQL;
 import svdp.general.Globals;
 import svdp.general.Util;
+import svdp.tcp.DebugServer;
 
 /**
  * Servlet implementation class VerifyHHHeadQR
  */
 @WebServlet("/VerifyHHHeadQR")
-public class VerifyHHHeadQR extends HttpServlet 
+public class VerifyHHHeadQR extends UHttpServlet 
 {
 	private static final long serialVersionUID = 1L;
        
@@ -43,10 +44,14 @@ public class VerifyHHHeadQR extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		DebugServer.println("VerifyHHHeadQR.doPost");
+		
 	    response.setContentType("application/json");
 	    response.setStatus( HttpServletResponse.SC_OK );
 	    response.setCharacterEncoding("UTF-8");
-		
+	    
+		String chapterID 			= this.getChapterID(request);
+
 		Gson 				gson 	= Globals.prettyPrinting ? new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create() : new GsonBuilder().disableHtmlEscaping().create();
 		OutputStreamWriter 	osw 	= new OutputStreamWriter (response.getOutputStream(), Charset.forName("UTF-8").newEncoder()  );
 		
@@ -70,9 +75,9 @@ public class VerifyHHHeadQR extends HttpServlet
 			return;
 		}
 		
-		String eventName 			= paramMap.get("EventName").trim();
-		String hauseholdhead_Token 	= paramMap.get("Hauseholdhead_Token").trim();
-		
+		String eventName 			= paramMap.get("EventName");
+		String hauseholdhead_Token 	= paramMap.get("Hauseholdhead_Token");
+
 		if ( eventName == null || hauseholdhead_Token == null )
 		{
 			gson.toJson( JSONResponse.not_success( 0, "Error de Parametros de entrada" ), osw ); 
@@ -95,36 +100,55 @@ public class VerifyHHHeadQR extends HttpServlet
 				}
 				else
 				{
-					String query2 = "SELECT ClientGroupName FROM Events WHERE EventName=\"" + eventName + "\"";
+					String where = " WHERE ";
 					
-					String clientGroupName = mySQL.simpleQuery( query2 );
-					
-					if ( clientGroupName == null )
+					if ( chapterID != null )
 					{
-						posP = JSONResponse.not_success( 003, "Event not found or not ClientGroupName assigned." );
+						where = " WHERE ChapterID=" + chapterID + " AND ";
+					}
+					
+					String query3 = "SELECT ClientsInvitedToEventID FROM ClientsInvitedToEvents" + where + "HauseholdheadEmail=\"" + hauseholdheadEmail + "\" AND EventName=\"" + eventName + "\";";
+							
+					 String clientsInvitedToEventID = mySQL.simpleQuery( query3 );
+					
+					if ( clientsInvitedToEventID == null || clientsInvitedToEventID.isEmpty() )
+					{
+						DebugServer.println("The Client is not invited for event");
+						
+						posP = JSONResponse.not_success( 003, "The Client is not invited for this event" );
+						
+						String command = "INSERT IGNORE INTO ClientsNOTInvitedToEvents ( ChapterID, EventName, HauseholdheadEmail ) VALUES (\"" + chapterID + "\", \"" + eventName + "\", \"" + hauseholdheadEmail + "\");";
+						
+						//DebugServer.println( command );
+						
+						mySQL.executeCommand(command);
+						
+						if ( mySQL.getLastError() != null )
+						{
+							DebugServer.println( mySQL.getLastError() );
+						}
 					}
 					else
 					{
-						String query3 = "SELECT * FROM ClientsInvitedToEvents WHERE HauseholdheadEmail=\"" + hauseholdheadEmail + "\" AND EventName=\"" + eventName + "\" ORDER BY InvitationID DESC";
-								
-						 Vector<Map<String, String>> resultMap = mySQL.simpleHMapQuery( query3 );
+						DebugServer.println("The Client is invited for event");
 						
-						if ( resultMap.isEmpty() )
-						{
-							posP = JSONResponse.not_success( 003, "The Client is not invited for this event" );
-						}
-						else
-						{
-							posP = JSONResponse.success( resultMap );
-							
-			       			String command = "INSERT INTO ClientsInvitedToEvents ( EventName, HauseholdheadEmail, Status ) VALUES (\"" + eventName + "\",\"" + hauseholdheadEmail + "\",\"REALIZED\")";
-			           		
-			       			mySQL.executeCommand(command);
+		       			String command = "UPDATE ClientsInvitedToEvents SET Status =\"REALIZED\" WHERE ClientsInvitedToEventID=" + clientsInvitedToEventID;
+		           		
+		       			mySQL.executeCommand(command);
+		       			
+						Hashtable<String,String> resultMap = new Hashtable<String,String>();
+						
+						resultMap.put( "ClientsInvitedToEventID", clientsInvitedToEventID );
 
-						}
+						Vector<Hashtable<String,String>> resultVect = new Vector<Hashtable<String,String>>();
+
+						resultVect.add(resultMap);
+
+		       			posP = JSONResponse.success( resultVect );
 					}
 				}
 			}
+			
 			finally
 			{
 				mySQL.close();
